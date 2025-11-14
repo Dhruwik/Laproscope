@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="laproscope_urdf">
+
+    <!-- ✅ Define reusable properties -->
+    <xacro:property name="joint6_upper_limit" value="0.28"/>  <!-- Prismatic joint travel -->
+    <xacro:property name="default_color" value="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+
+    <!-- ✅ Base Link -->
+    <link name="base">
+        <inertial>
+            <origin xyz="3.83329097276627E-17 -4.29355650579034E-17 0.00492622466159051" rpy="0 0 0"/>
+            <mass value="0.595685431532399"/>
+            <inertia ixx="0.00234455610349601" ixy="4.4720262696295E-11" ixz="7.63618511306938E-20"
+                     iyy="0.00402765803889398" iyz="-1.50621344482668E-19" izz="0.00631166014571594"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/base/base.obj"/>
+            </geometry>
+            <material name="base_color">
+                <color rgba="${default_color}"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/base/base.obj"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- ✅ Joint 1 -->
+    <joint name="joint_1" type="revolute">
+        <origin xyz="0 0 0.0231695161478648" rpy="0 0 0"/>
+        <parent link="base"/>
+        <child link="servo_joint"/>
+        <axis xyz="0 2.41936672379505E-05 0.999999999668945"/>
+        <limit lower="0" upper="6.28" effort="200" velocity="1"/>
+    </joint>
+
+    <!-- ✅ Servo Joint -->
+    <link name="servo_joint">
+        <inertial>
+            <origin xyz="1.9495939582893E-07 5.41191680179675E-07 0.0203725729535382" rpy="0 0 0"/>
+            <mass value="0.0668872208716784"/>
+            <inertia ixx="9.60027536903093E-05" ixy="2.05989968635812E-05" ixz="4.93673327576366E-10"
+                     iyy="8.05860489016923E-05" iyz="1.54361301454689E-09" izz="7.44832233305413E-05"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/servo_joint/servo_joint.obj"/>
+            </geometry>
+            <material name="servo_color">
+                <color rgba="${default_color}"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/servo_joint/servo_joint.obj"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- ✅ Joint 2 -->
+    <joint name="joint_2" type="revolute">
+        <origin xyz="0.0213719544798081 -0.0308143894150592 0.0693552294789635" rpy="0 0 0"/>
+        <parent link="servo_joint"/>
+        <child link="arm_1"/>
+        <axis xyz="-0.569911281928333 0.821706231405606 0"/>
+        <limit lower="-1.57" upper="1.57" effort="100" velocity="0.5"/>
+    </joint>
+
+    <!-- ✅ Arm 1 -->
+    <link name="arm_1">
+        <inertial>
+            <origin xyz="-0.0276551103097058 0.0264569623642856 0.113736450909705" rpy="0 0 0"/>
+            <mass value="0.220123710265403"/>
+            <inertia ixx="0.00260859939855862" ixy="1.52275205012602E-06" ixz="0.000155386932363509"
+                     iyy="0.00260746601467161" iyz="0.000107779039864334" izz="0.000212520040930073"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/arm_1/arm_1.obj"/>
+            </geometry>
+            <material name="arm_1_color">
+                <color rgba="${default_color}"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/arm_1/arm_1.obj"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- ✅ Joint 3 -->
+    <joint name="joint_3" type="revolute">
+        <origin xyz="-0.0347334401061548 -0.0164839681859413 0.31039691236493" rpy="0 0 0"/>
+        <parent link="arm_1"/>
+        <child link="arm_2"/>
+        <axis xyz="-0.569911281928334 0.821706231405606 0"/>
+        <limit lower="-0.78" upper="1.57" effort="100" velocity="0.5"/>
+    </joint>
+
+    <!-- ✅ Arm 2 -->
+    <link name="arm_2">
+        <inertial>
+            <origin xyz="-0.0969237277353411 -0.0291865197737133 -0.0040109492904789" rpy="0 0 0"/>
+            <mass value="0.0905770113739791"/>
+            <inertia ixx="0.000181847676834499" ixy="-0.000159894636393793" ixz="-1.23882956634763E-05"
+                     iyy="0.000301577324525151" iyz="-8.59097137039548E-06" izz="0.000449226081148877"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/arm_2/arm_2.obj"/>
+            </geometry>
+            <material name="arm_2_color">
+                <color rgba="${default_color}"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/arm_2/arm_2.obj"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- ✅ Joint 4 -->
+    <joint name="joint_4" type="revolute">
+        <origin xyz="-0.167497718367323 -0.0781408694990144 0.0170775834262024"
+                rpy="0.0435926541309888 0 -0.964398443738339"/>
+        <parent link="arm_2"/>
+        <child link="end"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.57" upper="1.57" effort="100" velocity="0.5"/>
+    </joint>
+
+    <!-- ✅ End Link -->
+    <link name="end">
+        <inertial>
+            <origin xyz="-0.00262568629911712 -0.075812714634457 -0.0250038194154321" rpy="0 0 0"/>
+            <mass value="0.0983467579147765"/>
+            <inertia ixx="0.000493277343932831" ixy="-1.41888900187869E-05" ixz="-4.3683485091196E-10"
+                     iyy="8.40866267388216E-05" iyz="-2.36804637109331E-08" izz="0.00050224319910371"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/end/end.obj"/>
+            </geometry>
+            <material name="end_color">
+                <color rgba="${default_color}"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/end/end.obj"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- ✅ Joint 5 -->
+    <joint name="joint_5" type="fixed">
+        <origin xyz="-0.0062736460030775 -0.181141391917552 -0.0187500000000003"
+                rpy="-0.0248545752789515 0.0358166689151097 0.963953269192368"/>
+        <parent link="end"/>
+        <child link="laproscope"/>
+    </joint>
+
+    <!-- ✅ Laproscope -->
+    <link name="laproscope">
+        <inertial>
+            <origin xyz="0.00671418967516202 0.00465676454508096 -0.187321873258244" rpy="0 0 0"/>
+            <mass value="0.0460194236365692"/>
+            <inertia ixx="0.000539048581644189" ixy="-4.79220891819611E-07" ixz="1.92770225531289E-05"
+                     iyy="0.000539407155654698" iyz="1.33699760512008E-05" izz="1.92213791900841E-06"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/laproscope/laproscope.obj"/>
+            </geometry>
+            <material name="laproscope_color">
+                <color rgba="${default_color}"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/laproscope/laproscope.obj"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- ✅ Joint 6 (Prismatic) -->
+    <joint name="joint_6" type="prismatic">
+        <origin xyz="0.0134283793503241 0.00931352909016181 -0.374643746516488" rpy="0 0 0"/>
+        <parent link="laproscope"/>
+        <child link="laproholder"/>
+        <axis xyz="-0.0358090116008643 -0.0248360775737648 0.999049990710635"/>
+        <limit lower="0" upper="${joint6_upper_limit}" effort="100" velocity="5"/>
+    </joint>
+
+    <!-- ✅ Laproholder -->
+    <link name="laproholder">
+        <inertial>
+            <origin xyz="-0.00143776220691183 -0.000997189592985503 0.0401127050215697" rpy="0 0 0"/>
+            <mass value="0.0322135965455985"/>
+            <inertia ixx="1.08616654517452E-05" ixy="-5.27011656320165E-09" ixz="2.11994421738786E-07"
+                     iyy="1.08656087832322E-05" iyz="1.47033097763118E-07" izz="4.95474650073436E-06"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/laproholder/laproholder.obj"/>
+            </geometry>
+            <material name="holder_color">
+                <color rgba="${default_color}"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/laproholder/laproholder.obj"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <!-- ✅ Joint 7 -->
+    <joint name="joint_7" type="fixed">
+        <origin xyz="-0.00153367920227288 -0.00106371480077255 0.0427887317824018" rpy="0 0 0"/>
+        <parent link="laproholder"/>
+        <child link="stomach"/>
+    </joint>
+
+    <!-- ✅ Stomach -->
+    <link name="stomach">
+        <inertial>
+            <origin xyz="0.000223806322506737 0.00015522548483618 -0.00624406244194294" rpy="0 0 0"/>
+            <mass value="0.189176576848457"/>
+            <inertia ixx="0.000256859339323337" ixy="2.23770914099955E-07" ixz="-9.00135413850748E-06"
+                     iyy="0.000256691904147881" iyz="-6.24307456862418E-06" izz="0.000507669096058448"/>
+        </inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/stomach/stomach.obj"/>
+            </geometry>
+            <material name="stomach_color">
+                <color rgba="${default_color}"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://laproscope_urdf/meshes/stomach/stomach.obj"/>
+            </geometry>
+        </collision>
+    </link>
+    
+<!-- ✅ Joint 8: Camera aligned with laproholder's axis, inheriting laparoscope's angle -->
+<joint name="joint_8" type="fixed">
+    <!-- Same position as laproholder, NO additional rotation -->
+    <!-- Camera will automatically inherit laparoscope's orientation -->
+    <origin xyz="0.0134283793503241 0.00931352909016181 -0.374643746516488" 
+            rpy="0 0 0"/>
+    <parent link="laproscope"/>
+    <child link="camera_link"/>
+</joint>
+
+<!-- ✅ Camera link: will naturally follow laparoscope's angle -->
+<link name="camera_link">
+    <inertial>
+        <origin xyz="0 0 -0.008" rpy="0 0 0"/>
+        <mass value="0.008"/>
+        <inertia ixx="8e-06" ixy="0" ixz="0"
+                 iyy="8e-06" iyz="0" izz="8e-06"/>
+    </inertial>
+
+    <visual>
+        <origin xyz="0 0 -0.008" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.016" radius="0.006"/>
+        </geometry>
+        <material name="camera_lens_color">
+            <color rgba="0.12 0.28 0.95 0.85"/>
+        </material>
+    </visual>
+
+    <collision>
+        <origin xyz="0 0 -0.008" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.016" radius="0.006"/>
+        </geometry>
+    </collision>
+</link>
+</robot>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="end_link">
+        <link name="end">
+            <inertial>
+                <origin xyz="-0.00262568629911712 -0.075812714634457 -0.0250038194154321" rpy="0 0 0"/>
+                <mass value="0.0983467579147765"/>
+                <inertia ixx="0.000493277343932831" ixy="-1.41888900187869E-05" ixz="-4.3683485091196E-10"
+                         iyy="8.40866267388216E-05" iyz="-2.36804637109331E-08" izz="0.00050224319910371"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/end/end.obj"/>
+                </geometry>
+                <material name="end_color"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/end/end.obj"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+</robot>

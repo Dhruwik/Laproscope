@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="laproholder_link">
+        <link name="laproholder">
+            <inertial>
+                <origin xyz="-0.00143776220691183 -0.000997189592985503 0.0401127050215697" rpy="0 0 0"/>
+                <mass value="0.0322135965455985"/>
+                <inertia ixx="1.08616654517452E-05" ixy="-5.27011656320165E-09" ixz="2.11994421738786E-07"
+                         iyy="1.08656087832322E-05" iyz="1.47033097763118E-07" izz="4.95474650073436E-06"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/laproholder/laproholder.obj"/>
+                </geometry>
+                <material name="holder_color"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/laproholder/laproholder.obj"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+</robot>

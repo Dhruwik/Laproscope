@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="all_joints">
+        <!-- ✅ Joint 1 -->
+        <joint name="joint_1" type="revolute">
+            <origin xyz="0 0 0.0231695161478648" rpy="0 0 0"/>
+            <parent link="base"/>
+            <child link="servo_joint"/>
+            <axis xyz="0 2.41936672379505E-05 0.999999999668945"/>
+            <limit lower="0" upper="6.28" effort="200" velocity="1"/>
+        </joint>
+
+        <!-- ✅ Joint 2 -->
+        <joint name="joint_2" type="revolute">
+            <origin xyz="0.0213719544798081 -0.0308143894150592 0.0693552294789635" rpy="0 0 0"/>
+            <parent link="servo_joint"/>
+            <child link="arm_1"/>
+            <axis xyz="-0.569911281928333 0.821706231405606 0"/>
+            <limit lower="-1.57" upper="1.57" effort="100" velocity="0.5"/>
+        </joint>
+
+        <!-- ✅ Joint 3 -->
+        <joint name="joint_3" type="revolute">
+            <origin xyz="-0.0347334401061548 -0.0164839681859413 0.31039691236493" rpy="0 0 0"/>
+            <parent link="arm_1"/>
+            <child link="arm_2"/>
+            <axis xyz="-0.569911281928334 0.821706231405606 0"/>
+            <limit lower="-0.78" upper="1.57" effort="100" velocity="0.5"/>
+        </joint>
+
+        <!-- ✅ Joint 4 -->
+        <joint name="joint_4" type="revolute">
+            <origin xyz="-0.167497718367323 -0.0781408694990144 0.0170775834262024"
+                    rpy="0.0435926541309888 0 -0.964398443738339"/>
+            <parent link="arm_2"/>
+            <child link="end"/>
+            <axis xyz="0 0 1"/>
+            <limit lower="-1.57" upper="1.57" effort="100" velocity="0.5"/>
+        </joint>
+
+        <!-- ✅ Joint 5 -->
+        <joint name="joint_5" type="fixed">
+            <origin xyz="-0.0062736460030775 -0.181141391917552 -0.0187500000000003"
+                    rpy="-0.0248545752789515 0.0358166689151097 0.963953269192368"/>
+            <parent link="end"/>
+            <child link="laproscope"/>
+        </joint>
+
+        <!-- ✅ Joint 6 (Prismatic) -->
+        <joint name="joint_6" type="prismatic">
+            <origin xyz="0.0134283793503241 0.00931352909016181 -0.374643746516488" rpy="0 0 0"/>
+            <parent link="laproscope"/>
+            <child link="laproholder"/>
+            <axis xyz="-0.0358090116008643 -0.0248360775737648 0.999049990710635"/>
+            <limit lower="0" upper="${joint6_upper_limit}" effort="100" velocity="5"/>
+        </joint>
+
+        <!-- ✅ Joint 7 -->
+        <joint name="joint_7" type="fixed">
+            <origin xyz="-0.00153367920227288 -0.00106371480077255 0.0427887317824018" rpy="0 0 0"/>
+            <parent link="laproholder"/>
+            <child link="stomach"/>
+        </joint>
+
+        <!-- ✅ Joint 8: Camera -->
+        <joint name="joint_8" type="fixed">
+            <origin xyz="0.0134283793503241 0.00931352909016181 -0.374643746516488" rpy="0 0 0"/>
+            <parent link="laproscope"/>
+            <child link="camera_link"/>
+        </joint>
+    </xacro:macro>
+
+</robot>

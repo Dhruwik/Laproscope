@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="stomach_link">
+        <link name="stomach">
+            <inertial>
+                <origin xyz="0.000223806322506737 0.00015522548483618 -0.00624406244194294" rpy="0 0 0"/>
+                <mass value="0.189176576848457"/>
+                <inertia ixx="0.000256859339323337" ixy="2.23770914099955E-07" ixz="-9.00135413850748E-06"
+                         iyy="0.000256691904147881" iyz="-6.24307456862418E-06" izz="0.000507669096058448"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/stomach/stomach.obj"/>
+                </geometry>
+                <material name="stomach_color"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/stomach/stomach.obj"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+</robot>

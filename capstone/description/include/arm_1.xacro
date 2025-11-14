@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="arm_1_link">
+        <link name="arm_1">
+            <inertial>
+                <origin xyz="-0.0276551103097058 0.0264569623642856 0.113736450909705" rpy="0 0 0"/>
+                <mass value="0.220123710265403"/>
+                <inertia ixx="0.00260859939855862" ixy="1.52275205012602E-06" ixz="0.000155386932363509"
+                         iyy="0.00260746601467161" iyz="0.000107779039864334" izz="0.000212520040930073"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/arm_1/arm_1.obj"/>
+                </geometry>
+                <material name="arm_1_color"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/arm_1/arm_1.obj"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+</robot>

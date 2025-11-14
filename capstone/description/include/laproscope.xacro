@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="laproscope_link">
+        <link name="laproscope">
+            <inertial>
+                <origin xyz="0.00671418967516202 0.00465676454508096 -0.187321873258244" rpy="0 0 0"/>
+                <mass value="0.0460194236365692"/>
+                <inertia ixx="0.000539048581644189" ixy="-4.79220891819611E-07" ixz="1.92770225531289E-05"
+                         iyy="0.000539407155654698" iyz="1.33699760512008E-05" izz="1.92213791900841E-06"/>
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/laproscope/laproscope.obj"/>
+                </geometry>
+                <material name="laproscope_color"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh filename="package://capstone/meshes/laproscope/laproscope.obj"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+</robot>

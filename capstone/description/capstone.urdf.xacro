@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="capstone">
+
+    <!-- ✅ Include all component files -->
+    <xacro:include filename="$(find capstone)/urdf/includes/materials.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/base.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/servo_joint.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/arm_1.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/arm_2.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/end.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/laproscope.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/laproholder.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/stomach.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/camera.xacro"/>
+    <xacro:include filename="$(find capstone)/urdf/includes/joints.xacro"/>
+
+    <!-- ✅ Define global properties -->
+    <xacro:property name="joint6_upper_limit" value="0.28"/>
+    
+    <!-- ✅ Instantiate all components -->
+    <base_link/>
+    <servo_joint_link/>
+    <arm_1_link/>
+    <arm_2_link/>
+    <end_link/>
+    <laproscope_link/>
+    <laproholder_link/>
+    <stomach_link/>
+    <camera_link/>
+    
+    <!-- ✅ Instantiate all joints -->
+    <all_joints/>
+
+</robot>

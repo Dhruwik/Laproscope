@@ -1,0 +1,813 @@
+<sdf version='1.10'>
+  <world name='empty'>
+    <physics name='1ms' type='ignored'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+    
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='Table'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='surface'>
+          <pose>0 0 1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.5 0.80000000000000004 0.029999999999999999</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.59999999999999998</mu>
+                <mu2>0.59999999999999998</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual1'>
+          <pose>0 0 1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>1.5 0.80000000000000004 0.029999999999999999</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>1 1 1 1</diffuse>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Wood</name>
+            </script>
+            <pbr>
+              <metal>
+                <albedo_map>https://fuel.gazebosim.org/1.0/openrobotics/models/table/4/files/Table_Diffuse.jpg</albedo_map>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+        <collision name='front_left_leg'>
+          <pose>0.68000000000000005 0.38 0.5 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='front_left_leg'>
+          <pose>0.68000000000000005 0.38 0.5 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <collision name='front_right_leg'>
+          <pose>0.68000000000000005 -0.38 0.5 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='front_right_leg'>
+          <pose>0.68000000000000005 -0.38 0.5 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <collision name='back_right_leg'>
+          <pose>-0.68000000000000005 -0.38 0.5 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='back_right_leg'>
+          <pose>-0.68000000000000005 -0.38 0.5 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <collision name='back_left_leg'>
+          <pose>-0.68000000000000005 0.38 0.5 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='back_left_leg'>
+          <pose>-0.68000000000000005 0.38 0.5 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.02</radius>
+              <length>1</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-0.53789699999999996 0.0076539599999999996 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='laproscope_urdf'>
+      <link name='base'>
+        <inertial>
+          <pose>3.8332909727662701e-17 -4.29355650579034e-17 0.0049262246615905097 0 0 0</pose>
+          <mass>0.59568543153239895</mass>
+          <inertia>
+            <ixx>0.0023445561034960102</ixx>
+            <ixy>4.4720262696295001e-11</ixy>
+            <ixz>7.6361851130693794e-20</ixz>
+            <iyy>0.00402765803889398</iyy>
+            <iyz>-1.50621344482668e-19</iyz>
+            <izz>0.0063116601457159404</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/base/base.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='base_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/base/base.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.990196109 1 1 1</diffuse>
+            <ambient>0.990196109 1 1 1</ambient>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='joint_1' type='revolute'>
+        <pose>-1.05879e-22 1.3234899999999999e-23 -3.4694499999999997e-18 4.2351600000000001e-22 1.0161100000000001e-22 2.1516999999999999e-44</pose>
+        <parent>base</parent>
+        <child>servo_joint</child>
+        <axis>
+          <xyz>1.0161103501072214e-22 2.4193667238879251e-05 0.99999999970733322</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>6.2800000000000002</upper>
+            <effort>200</effort>
+            <velocity>1</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+     
+      <transmission name="joint_1_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor1">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      </transmission>
+      <link name='servo_joint'>
+        <pose>2.0816681711721685e-17 2.7755575615628914e-17 0.023169516147864888 3.9743883114906414e-06 1.3285868212725759e-05 0.58134265306641386</pose>
+        <inertial>
+          <pose>1.9495939582893e-07 5.4119168017967496e-07 0.020372572953538198 0 0 0</pose>
+          <mass>0.066887220871678393</mass>
+          <inertia>
+            <ixx>9.6002753690309294e-05</ixx>
+            <ixy>2.0598996863581199e-05</ixy>
+            <ixz>4.9367332757636604e-10</ixz>
+            <iyy>8.0586048901692297e-05</iyy>
+            <iyz>1.54361301454689e-09</iyz>
+            <izz>7.4483223330541301e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='servo_joint_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/servo_joint/servo_joint.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='servo_joint_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/servo_joint/servo_joint.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.990196109 1 1 1</diffuse>
+            <ambient>0.990196109 1 1 1</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='joint_2' type='revolute'>
+        <pose>0 3.4694499999999997e-18 0 0 0 0</pose>
+        <parent>servo_joint</parent>
+        <child>arm_1</child>
+        <axis>
+          <xyz>-0.56991128192833329 0.82170623140560639 0</xyz>
+          <limit>
+            <lower>-1.5700000000000001</lower>
+            <upper>1.5700000000000001</upper>
+            <effort>100</effort>
+            <velocity>0.5</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+      <transmission name="joint_2_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor2">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      </transmission>
+      <link name='arm_1'>
+        <pose>0.034783636161389464 -0.014015779080734786 0.092524339206839334 0.1770571897464259 -0.24867614884778944 0.559154803060532</pose>
+        <inertial>
+          <pose>-0.027655110309705799 0.026456962364285599 0.11373645090970499 0 0 0</pose>
+          <mass>0.22012371026540301</mass>
+          <inertia>
+            <ixx>0.0026085993985586202</ixx>
+            <ixy>1.5227520501260201e-06</ixy>
+            <ixz>0.000155386932363509</ixz>
+            <iyy>0.00260746601467161</iyy>
+            <iyz>0.000107779039864334</iyz>
+            <izz>0.000212520040930073</izz>
+          </inertia>
+        </inertial>
+        <collision name='arm_1_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/arm_1/arm_1.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='arm_1_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/arm_1/arm_1.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.990196109 1 1 1</diffuse>
+            <ambient>0.990196109 1 1 1</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='joint_3' type='revolute'>
+        <pose>1.3877799999999999e-17 1.3877799999999999e-17 5.5511199999999995e-17 0 1.73472e-18 0</pose>
+        <parent>arm_1</parent>
+        <child>arm_2</child>
+        <axis>
+          <xyz>-0.56991128192833396 0.82170623140560595 9.8863847998511757e-19</xyz>
+          <limit>
+            <lower>-0.78000000000000003</lower>
+            <upper>1.5700000000000001</upper>
+            <effort>100</effort>
+            <velocity>0.5</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+      <transmission name="joint_3_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor3">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      </transmission>
+      <link name='arm_2'>
+        <pose>-0.019287598815369573 -0.13148692386881405 0.37730707738580871 -0.025878995457900553 0.037310247953754032 0.58086004024593263</pose>
+        <inertial>
+          <pose>-0.096923727735341095 -0.029186519773713299 -0.0040109492904789002 0 0 0</pose>
+          <mass>0.090577011373979097</mass>
+          <inertia>
+            <ixx>0.00018184767683449899</ixx>
+            <ixy>-0.00015989463639379299</ixy>
+            <ixz>-1.2388295663476301e-05</ixz>
+            <iyy>0.00030157732452515098</iyy>
+            <iyz>-8.5909713703954802e-06</iyz>
+            <izz>0.000449226081148877</izz>
+          </inertia>
+        </inertial>
+        <collision name='arm_2_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/arm_2/arm_2.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='arm_2_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/arm_2/arm_2.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.990196109 1 1 1</diffuse>
+            <ambient>0.990196109 1 1 1</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='joint_4' type='revolute'>
+        <pose>0 2.7755599999999997e-17 0 0 0 0</pose>
+        <parent>arm_2</parent>
+        <child>end</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1.5700000000000001</lower>
+            <upper>1.5700000000000001</upper>
+            <effort>100</effort>
+            <velocity>0.5</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+     <transmission name="joint_4_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_4">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor4">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      </transmission>
+      <link name='end'>
+        <pose>-0.1159989004396737 -0.28787911272994687 0.40263556730046046 0.00026765963944724126 -0.0017908575859979182 -2.1081980769089554</pose>
+        <inertial>
+          <pose>-0.0039190223836140844 -0.11317391531295951 -0.099526612434872389 0 0 0</pose>
+          <mass>0.15236618155134571</mass>
+          <inertia>
+            <ixx>0.0032292361298572412</ixx>
+            <ixy>-2.7592781549647088e-05</ixy>
+            <ixz>-2.673660740937059e-05</ixz>
+            <iyy>0.0024333041426146929</iyy>
+            <iyz>-0.00077282835862320506</iyz>
+            <izz>0.0008988112934864372</izz>
+          </inertia>
+        </inertial>
+        <collision name='end_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/end/end.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name='end_fixed_joint_lump__laproscope_collision_1'>
+          <pose>-0.0062736460030775 -0.18114139191755199 -0.018750000000000301 -0.024854575278951501 0.035816668915109713 0.96395326919236757</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/laproscope/laproscope.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name='end_fixed_joint_lump__camera_link_collision_2'>
+          <pose>-0.0062736460030774557 -0.18149002270780029 -0.40174239992568539 -0.024854575278951501 0.035816668915109713 0.96395326919236757</pose>
+          <geometry>
+            <cylinder>
+              <length>0.016</length>
+              <radius>0.0060000000000000001</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='end_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/end/end.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.990196109 1 1 1</diffuse>
+            <ambient>0.990196109 1 1 1</ambient>
+          </material>
+        </visual>
+        <visual name='end_fixed_joint_lump__laproscope_visual_1'>
+          <pose>-0.0062736460030775 -0.18114139191755199 -0.018750000000000301 -0.024854575278951501 0.035816668915109713 0.96395326919236757</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/laproscope/laproscope.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.990196109 1 1 1</diffuse>
+            <ambient>0.990196109 1 1 1</ambient>
+          </material>
+        </visual>
+        <visual name='end_fixed_joint_lump__camera_link_visual_2'>
+          <pose>-0.0062736460030774557 -0.18149002270780029 -0.40174239992568539 -0.024854575278951501 0.035816668915109713 0.96395326919236757</pose>
+          <geometry>
+            <cylinder>
+              <length>0.016</length>
+              <radius>0.0060000000000000001</radius>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.149999991 0.349999994 1 0.850000024</diffuse>
+            <ambient>0.149999991 0.349999994 1 0.850000024</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <joint name='joint_6' type='prismatic'>
+        <pose>5.5511199999999995e-17 5.5511199999999995e-17 -8.2399399999999993e-18 6.9388900000000004e-18 -8.6736199999999993e-18 1.11022e-16</pose>
+        <parent>end</parent>
+        <child>laproholder</child>
+        <axis>
+          <xyz>-0.035809011600864298 -0.024836077573764805 0.99904999071063472</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>0.28000000000000003</upper>
+            <effort>100</effort>
+            <velocity>5</velocity>
+            <stiffness>100000000</stiffness>
+            <dissipation>1</dissipation>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+            <damping>0</damping>
+            <friction>0</friction>
+          </dynamics>
+        </axis>
+      </joint>
+      <transmission name="joint_6_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="joint_6">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="motor6">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      </transmission>
+
+      <link name='laproholder'>
+        <pose>-0.26863238952236118 -0.19034061129359908 0.057562334734457377 -0.026173827792549398 0.034575483748797542 -1.1442909909883174</pose>
+        <inertial>
+          <pose>-0.00132848154303245 -0.0009213957376376519 0.037063839907650303 0 0 0</pose>
+          <mass>0.22139017339405551</mass>
+          <inertia>
+            <ixx>0.00026807165565083011</ixx>
+            <ixy>2.1818854389215231e-07</ixy>
+            <ixz>-8.7767990779233764e-06</ixz>
+            <iyy>0.00026790839744868157</iyy>
+            <iyz>-6.0873297810714621e-06</iyz>
+            <izz>0.00051262450934089676</izz>
+          </inertia>
+        </inertial>
+        <collision name='laproholder_collision'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/laproholder/laproholder.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name='laproholder_fixed_joint_lump__stomach_collision_1'>
+          <pose>-0.0015336792022728799 -0.0010637148007725499 0.0427887317824018 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/stomach/stomach.obj</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='laproholder_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/laproholder/laproholder.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.990196109 1 1 1</diffuse>
+            <ambient>0.990196109 1 1 1</ambient>
+          </material>
+        </visual>
+        <visual name='laproholder_fixed_joint_lump__stomach_visual_1'>
+          <pose>-0.0015336792022728799 -0.0010637148007725499 0.0427887317824018 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>file:///home/dhruwik/PROJECTS/my_ros2_ws/src/laproscope_urdf/meshes/stomach/stomach.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>0.990196109 1 1 1</diffuse>
+            <ambient>0.990196109 1 1 1</ambient>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <frame name='joint_8' attached_to='laproscope'>
+        <pose>0.0134283793503241 0.0093135290901618095 -0.37464374651648802 0 0 0</pose>
+      </frame>
+      <frame name='camera_link' attached_to='joint_8'>
+        <pose>0 0 0 0 0 0</pose>
+      </frame>
+      <frame name='joint_5' attached_to='end'>
+        <pose>-0.0062736460030775 -0.18114139191755199 -0.018750000000000301 -0.024854575278951518 0.035816668915109699 0.96395326919236757</pose>
+      </frame>
+      <frame name='laproscope' attached_to='joint_5'>
+        <pose>0 0 0 0 0 0</pose>
+      </frame>
+      <frame name='joint_7' attached_to='laproholder'>
+        <pose>-0.0015336792022728799 -0.0010637148007725499 0.0427887317824018 0 0 0</pose>
+      </frame>
+      <frame name='stomach' attached_to='joint_7'>
+        <pose>0 0 0 0 0 0</pose>
+      </frame>
+      <pose>-0.04204879690568452 0.1897879582868322 1.0223786631957292 1.4950866740483072e-05 8.7196252269156502e-05 -0.00032784813486471607</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+       <plugin name='gz_ros2_control' filename='libgz_ros2_control-system.so'>
+       <parameters>$(find laproscope_urdf)/config/ros2_controllers.yaml</parameters>
+       </plugin>
+    </model>
+    <model name='hollow_cylinder'>
+      <link name='link'>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial auto='true'>
+          <pose>-1.3245300560519966e-18 1.5944436831194128e-18 1.1343921147767787e-16 0 0 0</pose>
+          <mass>0.10000000000000001</mass>
+          <inertia>
+            <ixx>0.00018098954033504493</ixx>
+            <ixy>-3.9719509172057098e-21</ixy>
+            <ixz>4.9190546857342949e-21</ixz>
+            <iyy>0.00018098954033504466</iyy>
+            <iyz>-1.9820210857095691e-21</iyz>
+            <izz>0.00019531241400342188</izz>
+          </inertia>
+        </inertial>
+        <collision name='cylinder_collision'>
+          <density>1000</density>
+          <auto_inertia_params>
+            <gz:voxel_size>0.01</gz:voxel_size>
+          </auto_inertia_params>
+          <geometry>
+            <mesh>
+              <uri>file:///home/dhruwik/.gz/fuel/fuel.gazebosim.org/jasmeetsingh/models/hollow cylinder/1/meshes/hollow_cylinder.dae</uri>
+              <scale>0.1 0.1 0.5</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='cylinder_visual'>
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file:///home/dhruwik/.gz/fuel/fuel.gazebosim.org/jasmeetsingh/models/hollow cylinder/1/meshes/hollow_cylinder.dae</uri>
+              <scale>0.10000000000000001 0.10000000000000001 0.10000000000000001</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>1 1 0 1</diffuse>
+            <ambient>1 1 0 1</ambient>
+            <specular>1 1 0 1</specular>
+          </material>
+        </visual>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-0.326401804720027 0.013606379803265477 1.060892012248047 0.0046091227078103409 0.0050222081933302661 0.95712215291132541</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.0099999997764825821</linear>
+        <constant>0.89999997615814209</constant>
+        <quadratic>0.0010000000474974513</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>

@@ -1,0 +1,89 @@
+Using Physical Models in Gazebo
+
+This guide explains how to import and use physical models in Gazebo and save them as .sdf files for your workspace.
+
+Prerequisites
+
+Gazebo installed on your system.
+
+Internet access to browse Gazebo model library at app.gazebosim.org
+.
+
+Basic knowledge of terminal commands.
+
+Steps
+1. Launch Gazebo
+
+Open a terminal and run:
+
+cd PROJECTS/my_ros2_ws/src/laproscope_urdf/
+gz sim --verbose 3 imp_file_1.sdf 
+
+This launches Gazebo with verbose logging.
+
+2. Open an Empty World
+
+In Gazebo, select File → New World (or open an empty world file).
+
+You now have a blank workspace to import models.
+
+3. Open Resource Spawner
+
+Click the three dots on the top-right corner.
+
+Select Resource Spawner.
+
+Note: The resource spawner may initially have no models downloaded to save space.
+
+4. Browse Models Online
+
+Open Chrome (or your browser) and go to Gazebo Model Library
+.
+
+Browse the ready-made models provided by different users.
+
+5. Load a Model
+
+In the Resource Spawner, enter your Gazebo username to see all your uploaded models.
+
+Use the search bar to find the model you want.
+
+Import the selected model to your workspace.
+
+6. Save the Model as .sdf
+
+Click the three-line menu (top-left).
+
+Select Save File → choose location → save as .sdf.
+
+You now have a .sdf file representing your Gazebo model.
+
+7. Locate Model Assets
+
+Open the .sdf file with a text editor.
+
+Look for the include path in the file.
+
+Copy the path from /home up to models.
+
+For example, in terminal:
+
+cd /home/dhruwik/.gz/fuel/fuel.gazebosim.org/openrobotics/models
+xdg-open .
+
+
+This opens the folder containing your imported model.
+
+You can inspect how the model is structured and assets are stored.
+
+8. Browse All Gazebo Models
+
+To check all Gazebo models stored on your system:
+
+cd
+cd .gz && xdg-open .
+
+
+Opens the .gz folder containing all downloaded models and assets.
+
+Useful for quickly locating textures, meshes, and other resources.

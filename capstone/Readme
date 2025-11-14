@@ -1,0 +1,94 @@
+🧠 Launching the Laproscope URDF in RViz2
+
+This guide explains how to build, launch, and visualize the Laproscope robot model in RViz2 using ROS 2.
+
+1️⃣ Build Your Package
+
+Make sure you are in your ROS 2 workspace root (for example: ~/PROJECTS/my_ros2_ws) and then build your workspace.
+
+cd ~/PROJECTS/my_ros2_ws
+colcon build --symlink-install
+source install/setup.bash
+
+
+💡 Always source install/setup.bash after every new terminal or rebuild.
+
+2️⃣ Launch the Robot (RViz + Joint State Publisher)
+
+Run the main launch file to start the entire visualization setup:
+
+ros2 launch laproscope_urdf display.launch.py
+
+
+This will:
+
+Load your laproscope_urdf.urdf.xacro
+
+Start the robot_state_publisher
+
+Launch the joint_state_publisher_gui
+
+Automatically open RViz2 with your robot model loaded
+
+🧩 Required packages:
+If you haven’t already, make sure these are installed:
+
+sudo apt install ros-${ROS_DISTRO}-rviz2 ros-${ROS_DISTRO}-joint-state-publisher-gui
+
+3️⃣ Modify Joint 6 Motion Range (if needed)
+
+To limit the prismatic joint’s travel to 8 cm (0.08 m):
+
+Edit your laproscope_urdf.urdf.xacro file and locate this line near the top:
+
+<xacro:property name="joint6_upper_limit" value="0.10"/>
+
+
+Change it to:
+
+<xacro:property name="joint6_upper_limit" value="0.08"/>
+
+
+Then rebuild:
+
+colcon build --symlink-install
+source install/setup.bash
+
+4️⃣ Check URDF for Validity
+
+You can verify that your URDF parses correctly before launching:
+
+check_urdf src/laproscope_urdf/description/laproscope_urdf.urdf.xacro
+
+
+✅ You should see output like:
+
+robot name is: laproscope_urdf
+---------- Successfully Parsed XML ---------------
+root Link: base has 1 child(ren)
+    child(1): servo_joint
+        ...
+
+5️⃣ Expected File Structure
+laproscope_urdf/
+├── CMakeLists.txt
+├── package.xml
+├── description/
+│   ├── laproscope_urdf.urdf.xacro
+│   ├── laproscope_urdf.urdf
+│   └── view_robot.rviz
+├── launch/
+│   ├── display.launch.py
+│   └── gazebo.launch.py
+├── meshes/
+│   ├── base.STL
+│   ├── arm_1.STL
+│   ├── arm_2.STL
+│   ├── end.STL
+│   ├── laproscope.STL
+│   ├── laproholder.STL
+│   ├── servo_joint.STL
+│   └── stomach.STL
+└── worlds/
+    └── test_world.world
+
